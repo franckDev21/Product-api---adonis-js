@@ -52,13 +52,13 @@ export default class ProductsController {
 
     product.thumbnail = await FileService.upload(thumbnail, 'products')
 
+    product.merge({ ...payload, userId: auth.user!.id }).save()
+
     // Save product images in database
     const imgs = await FileService.uploadMultiple(images, 'products')
     for (let url of imgs) {
       await product.related('images').create({ url })
     }
-
-    product.merge({ ...payload, userId: auth.user!.id }).save()
   }
 
   private async getProductListWithPagination({ request }: HttpContext) {
