@@ -8,3 +8,14 @@ export const updateProductImageValidator = vine.compile(
     }),
   })
 )
+
+export const createImagesValidator = vine.compile(
+  vine.object({
+    images: vine.array(
+      vine.file({
+        size: '2mb',
+        extnames: ['jpg', 'png'],
+      })
+    ),
+  })
+)

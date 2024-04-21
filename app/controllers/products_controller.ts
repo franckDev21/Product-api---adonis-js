@@ -1,13 +1,10 @@
 import Product from '#models/product'
-import env from '#start/env'
-import { updateProductImageValidator } from '#validators/file'
+import FileUploaderService from '#services/upload_service'
+import { createImagesValidator, updateProductImageValidator } from '#validators/file'
 import { createProductValidator } from '#validators/product'
-import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
 
-@inject()
 export default class ProductsController {
   async index(ctx: HttpContext) {
     return this.getProductListWithPagination(ctx)
@@ -19,12 +16,18 @@ export default class ProductsController {
 
     const { thumbnail } = await request.validateUsing(updateProductImageValidator)
 
+    const { images } = await request.validateUsing(createImagesValidator)
+
     const product = await auth.user!.related('products').create(payload)
 
-    await thumbnail.move(app.makePath('uploads/products'))
-
-    product.thumbnail = `${env.get('APP_URL')}/uploads/products/${thumbnail.fileName}`
+    product.thumbnail = await FileUploaderService.upload(thumbnail, 'products')
     await product.save()
+
+    // Save product images in database
+    const imgs = await FileUploaderService.uploadMultiple(images, 'products')
+    for (let url of imgs) {
+      await product.related('images').create({ url })
+    }
 
     return response.status(201).json({ message: 'Product created !' })
   }
