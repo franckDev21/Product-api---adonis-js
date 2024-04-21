@@ -1,5 +1,5 @@
 import Product from '#models/product'
-import FileUploaderService from '#services/upload_service'
+import FileService from '#services/file_service'
 import { createImagesValidator, updateProductImageValidator } from '#validators/file'
 import { createProductValidator } from '#validators/product'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -10,29 +10,15 @@ export default class ProductsController {
     return this.getProductListWithPagination(ctx)
   }
 
-  async store({ auth, request, response }: HttpContext) {
-    const data = request.all()
-    const payload = await createProductValidator.validate(data)
-
-    const { thumbnail } = await request.validateUsing(updateProductImageValidator)
-
-    const { images } = await request.validateUsing(createImagesValidator)
-
-    const product = await auth.user!.related('products').create(payload)
-
-    product.thumbnail = await FileUploaderService.upload(thumbnail, 'products')
-    await product.save()
-
-    // Save product images in database
-    const imgs = await FileUploaderService.uploadMultiple(images, 'products')
-    for (let url of imgs) {
-      await product.related('images').create({ url })
-    }
-
+  async store({ auth, request, response, params }: HttpContext) {
+    await this.handleRequest(auth, params, request)
     return response.status(201).json({ message: 'Product created !' })
   }
 
-  async update({}: HttpContext) {}
+  async update({ auth, params, request, response }: HttpContext) {
+    await this.handleRequest(auth, params, request)
+    return response.ok({ message: 'Product updated !' })
+  }
 
   async search(ctx: HttpContext) {
     const query = ctx.request.input('q')
@@ -41,6 +27,38 @@ export default class ProductsController {
     if (!query) return this.getProductListWithPagination(ctx)
 
     return db.from('products').whereILike('title', `%${query}%`).paginate(page, 10)
+  }
+
+  async handleRequest(
+    auth: HttpContext['auth'],
+    params: HttpContext['params'],
+    request: HttpContext['request']
+  ) {
+    const product = params.id
+      ? await Product.query()
+          .where('id', params.id)
+          .preload('user', (userQuery) => {
+            userQuery.select('fullName')
+          })
+          .preload('images', (imageQuery) => {
+            imageQuery.select('url')
+          })
+          .firstOrFail()
+      : new Product()
+
+    const payload = await request.validateUsing(createProductValidator)
+    const { thumbnail } = await request.validateUsing(updateProductImageValidator)
+    const { images } = await request.validateUsing(createImagesValidator)
+
+    product.thumbnail = await FileService.upload(thumbnail, 'products')
+
+    // Save product images in database
+    const imgs = await FileService.uploadMultiple(images, 'products')
+    for (let url of imgs) {
+      await product.related('images').create({ url })
+    }
+
+    product.merge({ ...payload, userId: auth.user!.id }).save()
   }
 
   private async getProductListWithPagination({ request }: HttpContext) {

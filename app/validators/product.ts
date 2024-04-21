@@ -2,11 +2,7 @@ import vine from '@vinejs/vine'
 
 export const createProductValidator = vine.compile(
   vine.object({
-    title: vine
-      .string()
-      .trim()
-      .minLength(6)
-      .unique(async (db, value) => !(await db.from('products').where('title', value).first())),
+    title: vine.string().trim().minLength(6),
     description: vine.string().minLength(8),
     price: vine.number(),
     discount_percentage: vine.number(),

@@ -2,8 +2,9 @@ import { MultipartFile } from '@adonisjs/core/bodyparser'
 import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import { cuid } from '@adonisjs/core/helpers'
+import fs from 'node:fs'
 
-export default class FileUploaderService {
+export default class FileService {
   static async upload(thumbnail: MultipartFile, path: string) {
     await thumbnail.move(app.makePath(`uploads/${path}`), {
       name: `${cuid()}.${thumbnail.extname}`,
@@ -21,5 +22,18 @@ export default class FileUploaderService {
       paths.push(`${env.get('APP_URL')}/uploads/${path}/${file.fileName}`)
     }
     return paths
+  }
+
+  static async deleteFiles(files: string[]) {
+    files.forEach((path) => {
+      // Use the unlink method to delete the file
+      fs.unlink(path, (err: NodeJS.ErrnoException | null) => {
+        if (err) {
+          console.error('An error occurred while deleting the file:', err)
+          return
+        }
+        console.log('The file was successfully deleted!')
+      })
+    })
   }
 }
