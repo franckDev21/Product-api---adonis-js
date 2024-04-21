@@ -37,6 +37,7 @@ router
         router.get('/', [ProductsController, 'index'])
         router.post('/', [ProductsController, 'store'])
         router.patch('/:id', [ProductsController, 'update'])
+        router.get('/search', [ProductsController, 'search'])
       })
       .prefix('products')
       .use(middleware.auth())
