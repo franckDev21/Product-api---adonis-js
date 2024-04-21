@@ -6,6 +6,7 @@ import { middleware } from '#start/kernel'
 import { HttpContext } from '@adonisjs/core/http'
 import { sep, normalize } from 'node:path'
 import app from '@adonisjs/core/services/app'
+import CategoriesController from '#controllers/categories_controller'
 
 const PATH_TRAVERSAL_REGEX = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -40,6 +41,16 @@ router
         router.get('/search', [ProductsController, 'search'])
       })
       .prefix('products')
+      .use(middleware.auth())
+
+    // CATEGORY
+    router
+      .group(() => {
+        router.get('/', [CategoriesController, 'index'])
+        router.post('/', [CategoriesController, 'store'])
+        router.patch('/:id', [CategoriesController, 'update'])
+      })
+      .prefix('categories')
       .use(middleware.auth())
   })
   .prefix('api/v1')

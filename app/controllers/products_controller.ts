@@ -6,8 +6,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 
 export default class ProductsController {
-  async index(ctx: HttpContext) {
-    return this.getProductListWithPagination(ctx)
+  async index({ request }: HttpContext) {
+    return this.getProductListWithPagination(request)
   }
 
   async store({ auth, request, response, params }: HttpContext) {
@@ -20,11 +20,11 @@ export default class ProductsController {
     return response.ok({ message: 'Product updated !' })
   }
 
-  async search(ctx: HttpContext) {
-    const query = ctx.request.input('q')
-    const page = ctx.request.input('page')
+  async search({ request }: HttpContext) {
+    const query = request.input('q')
+    const page = request.input('page')
 
-    if (!query) return this.getProductListWithPagination(ctx)
+    if (!query) return this.getProductListWithPagination(request)
 
     return db.from('products').whereILike('title', `%${query}%`).paginate(page, 10)
   }
@@ -34,17 +34,7 @@ export default class ProductsController {
     params: HttpContext['params'],
     request: HttpContext['request']
   ) {
-    const product = params.id
-      ? await Product.query()
-          .where('id', params.id)
-          .preload('user', (userQuery) => {
-            userQuery.select('fullName')
-          })
-          .preload('images', (imageQuery) => {
-            imageQuery.select('url')
-          })
-          .firstOrFail()
-      : new Product()
+    const product = params.id ? await Product.findOrFail(params.id) : new Product()
 
     const payload = await request.validateUsing(createProductValidator)
     const { thumbnail } = await request.validateUsing(updateProductImageValidator)
@@ -61,9 +51,9 @@ export default class ProductsController {
     }
   }
 
-  private async getProductListWithPagination({ request }: HttpContext) {
+  private async getProductListWithPagination(request: HttpContext['request']) {
     const page = request.input('page', 1)
-    const limit = 10
+    const limit = request.input('limit', 5)
 
     const products = await Product.query()
       .preload('user', (userQuery) => {
