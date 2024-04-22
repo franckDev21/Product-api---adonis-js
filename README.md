@@ -13,6 +13,8 @@ Pour commencer à utiliser l'API E-Commerce, suivez les étapes ci-dessous :
 3. Accédez au répertoire du projet : cd Product-api---adonis-js
 4. Installez les dépendances du projet : pnpm install (ou npm install ou yarn install)
 
+### Seeders
+1. Lan
 
 ### Configuration
 
