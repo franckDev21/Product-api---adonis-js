@@ -3,7 +3,14 @@ import { cartValidator } from '#validators/cart'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CartsController {
-  async index({}: HttpContext) {}
+  async index({ auth }: HttpContext) {
+    const carts = await auth
+      .user!.related('carts')
+      .query()
+      .preload('products', (productQuery) => productQuery.preload('product'))
+
+    return carts
+  }
 
   async store({ request, auth, response }: HttpContext) {
     const payload = await request.validateUsing(cartValidator)
