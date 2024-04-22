@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "d59dd6ab-4604-48be-ab39-a5d71ea20d52",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15200451",
+		"_collection_link": "https://lively-desert-4779.postman.co/workspace/Idea-Fusion~15373dda-eb88-46e3-a41d-c27c185dfb51/collection/15200451-d59dd6ab-4604-48be-ab39-a5d71ea20d52?action=share&source=collection_link&creator=15200451"
+	},
+	"item": [
+		{
+			"name": "Create product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.QWcxMDlyeFFzdklINUV2TnBQcGdFX19yNW5sZ1RYRl9wZWJzMDhZMTkyNTQ2MzUxMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Samsung 20",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Hi i'm a description for this product",
+							"type": "text"
+						},
+						{
+							"key": "discount_percentage",
+							"value": "28.7",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "400",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "4.4",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "3467",
+							"type": "text"
+						},
+						{
+							"key": "brand",
+							"value": "Samsung",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "thumbnail",
+							"type": "file",
+							"src": "/home/franckdev/Images/Captures d’écran/Capture d’écran du 2024-04-20 01-50-02.png"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/home/franckdev/Images/cn1.jpg",
+								"/home/franckdev/Images/cni2.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.QWcxMDlyeFFzdklINUV2TnBQcGdFX19yNW5sZ1RYRl9wZWJzMDhZMTkyNTQ2MzUxMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Samsung 20",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/franckdev/Images/cn1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.WXVhTktsczVaby1UNmV4amRmYjlZZlVLX2dzQS1SLTRLeWJObUMtVzEyNDI2ODYzMzM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"discounted_total\": 100,\n    \"total\": 1200,\n    \"products\": [1,2,1]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/carts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store cart Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.WXVhTktsczVaby1UNmV4amRmYjlZZlVLX2dzQS1SLTRLeWJObUMtVzEyNDI2ODYzMzM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/carts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.QWcxMDlyeFFzdklINUV2TnBQcGdFX19yNW5sZ1RYRl9wZWJzMDhZMTkyNTQ2MzUxMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Samsung 20",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/franckdev/Images/Captures d’écran/Capture d’écran du 2024-04-18 11-55-14.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/categories/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Category",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.QWcxMDlyeFFzdklINUV2TnBQcGdFX19yNW5sZ1RYRl9wZWJzMDhZMTkyNTQ2MzUxMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Samsung 20",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/franckdev/Images/cn1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/categories?limit=30",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.QWcxMDlyeFFzdklINUV2TnBQcGdFX19yNW5sZ1RYRl9wZWJzMDhZMTkyNTQ2MzUxMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Samsung 17",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Hi i'm a description for this product",
+							"type": "text"
+						},
+						{
+							"key": "discount_percentage",
+							"value": "28.7",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "3500",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "4.4",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "3467",
+							"type": "text"
+						},
+						{
+							"key": "brand",
+							"value": "Samsung",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "thumbnail",
+							"type": "file",
+							"src": "/home/franckdev/Images/Captures d’écran/Capture d’écran du 2024-04-18 12-40-11.png"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/home/franckdev/Images/Captures d’écran/Capture d’écran du 2024-04-20 02-07-40-2.png",
+								"/home/franckdev/Images/Captures d’écran/Capture d’écran du 2024-04-20 04-07-16-1.png"
+							]
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Poduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.WXVhTktsczVaby1UNmV4amRmYjlZZlVLX2dzQS1SLTRLeWJObUMtVzEyNDI2ODYzMzM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.NWttcFNmRmZZSVRxYWE1UVpVWTFfQ0Q2dlg5NlE2c0R5OGV6RkRXUTM4NDMxMTM3MjU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products/search?q=sam&page=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "sam"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.ZnBGT1dwejFza0JGbFBMUnJQRUZHODdZbUF5ZW1ESG45b1NJQjNfYjEyMjk0NjU5NTI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.ZnBGT1dwejFza0JGbFBMUnJQRUZHODdZbUF5ZW1ESG45b1NJQjNfYjEyMjk0NjU5NTI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/auth/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.ZnBGT1dwejFza0JGbFBMUnJQRUZHODdZbUF5ZW1ESG45b1NJQjNfYjEyMjk0NjU5NTI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"franckdev@gmail.com\",\n  \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oat_MQ.ZnBGT1dwejFza0JGbFBMUnJQRUZHODdZbUF5ZW1ESG45b1NJQjNfYjEyMjk0NjU5NTI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fullName\": \"Rose Claire\",\n  \"email\": \"franckdev@gmail.com\",\n  \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
