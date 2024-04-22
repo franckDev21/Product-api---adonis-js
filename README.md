@@ -14,7 +14,10 @@ Pour commencer à utiliser l'API E-Commerce, suivez les étapes ci-dessous :
 4. Installez les dépendances du projet : pnpm install (ou npm install ou yarn install)
 
 ### Seeders
-1. Lan
+
+Filling the database with false data
+
+1. `ace migration:fresh --seed`
 
 ### Configuration
 

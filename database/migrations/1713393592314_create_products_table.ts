@@ -15,7 +15,13 @@ export default class extends BaseSchema {
       table.string('brand').notNullable()
       table.string('thumbnail').notNullable().defaultTo('default-img.png')
 
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table
+        .integer('user_id')
+        .nullable()
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
       table
         .integer('category_id')
         .unsigned()
