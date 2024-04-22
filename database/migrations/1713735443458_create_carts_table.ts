@@ -6,12 +6,12 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('total')
-      table.integer('discountedTotal')
+      table.float('total')
+      table.float('discounted_total')
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
 
-      table.integer('totalProducts')
-      table.integer('totalQuantity')
+      table.integer('total_products')
+      table.integer('total_quantity')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

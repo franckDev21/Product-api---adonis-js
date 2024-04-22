@@ -6,6 +6,7 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Product from '#models/product'
+import Cart from '#models/cart'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -16,6 +17,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   // Relationships
   @hasMany(() => Product)
   declare products: HasMany<typeof Product>
+
+  @hasMany(() => Cart)
+  declare carts: HasMany<typeof Cart>
 
   // columns
   @column({ isPrimary: true })

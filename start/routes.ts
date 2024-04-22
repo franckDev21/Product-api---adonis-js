@@ -60,7 +60,7 @@ router
         router.get('/', [CartsController, 'index'])
         router.post('/', [CartsController, 'store'])
       })
-      .prefix('cart')
+      .prefix('carts')
       .use(middleware.auth())
   })
   .prefix('api/v1')
