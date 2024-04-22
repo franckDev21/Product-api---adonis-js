@@ -16,7 +16,7 @@ services:
     ports:
       - '3307:3307'
     environment:
-      MYSQL_ROOT_PASSWORD: franckdev21
-      MYSQL_DATABASE: adonis
-      MYSQL_USER: franckdev
-      MYSQL_PASSWORD: franckdev21
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: 
+      MYSQL_USER:
+      MYSQL_PASSWORD:
