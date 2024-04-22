@@ -1,6 +1,7 @@
 import CartService from '#services/cart_service'
 import { cartValidator } from '#validators/cart'
 import type { HttpContext } from '@adonisjs/core/http'
+import { mapApiResponseToUserCarts } from '../resource/cart.js'
 
 export default class CartsController {
   async index({ auth }: HttpContext) {
@@ -9,7 +10,7 @@ export default class CartsController {
       .query()
       .preload('products', (productQuery) => productQuery.preload('product'))
 
-    return carts
+    return mapApiResponseToUserCarts(carts)
   }
 
   async store({ request, auth, response }: HttpContext) {
